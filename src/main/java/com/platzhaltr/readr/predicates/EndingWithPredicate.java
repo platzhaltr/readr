@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
+package com.platzhaltr.readr.predicates;
 
 import com.google.common.base.Predicate;
 

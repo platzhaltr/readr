@@ -13,29 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
+package com.platzhaltr.readr.functions;
 
 import com.google.common.base.Function;
 
 /**
- * The Class AddPrefixFunction.
+ * The Class ReplaceFunction.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class AddPrefixFunction implements Function<String, String> {
+public class ReplaceFunction implements Function<String, String> {
 
-	/** The prefix. */
-	private final String prefix;
+	/** The old string. */
+	private final String oldString;
+
+	/** The new string. */
+	private final String newString;
 
 	/**
-	 * Instantiates a new prefix injector line transformer.
+	 * Instantiates a new replacement line transformer.
 	 *
-	 * @param prefix
-	 *            the prefix
+	 * @param oldString
+	 *            the old string
+	 * @param newString
+	 *            the new string
 	 */
-	public AddPrefixFunction(final String prefix) {
-		super();
-		this.prefix = prefix;
+	public ReplaceFunction(final String oldString,
+			final String newString) {
+		this.oldString = oldString;
+		this.newString = newString;
 	}
 
 	/*
@@ -44,8 +50,8 @@ public class AddPrefixFunction implements Function<String, String> {
 	 * @see com.google.common.base.Function#apply(java.lang.Object)
 	 */
 	@Override
-	public String apply(final String line) {
-		return prefix.concat(line);
+	public String apply(final String input) {
+		return input.replace(oldString, newString);
 	}
 
 }

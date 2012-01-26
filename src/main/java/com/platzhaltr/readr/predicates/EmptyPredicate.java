@@ -13,29 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
+package com.platzhaltr.readr.predicates;
 
 import com.google.common.base.Predicate;
 
 /**
- * The Class StartingWithPredicate.
+ * The Class EmptyPredicate.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class StartingWithPredicate implements Predicate<String> {
-
-	/** The prefix. */
-	private final String prefix;
-
-	/**
-	 * Instantiates a new starting with predicate.
-	 *
-	 * @param prefix
-	 *            the prefix
-	 */
-	public StartingWithPredicate(final String prefix) {
-		this.prefix = prefix;
-	}
+public class EmptyPredicate implements Predicate<String> {
 
 	/*
 	 * (non-Javadoc)
@@ -43,8 +30,8 @@ public class StartingWithPredicate implements Predicate<String> {
 	 * @see com.google.common.base.Predicate#apply(java.lang.Object)
 	 */
 	@Override
-	public boolean apply(final String line) {
-		return line.startsWith(prefix);
+	public boolean apply(final String input) {
+		return input.isEmpty();
 	}
 
 }

@@ -25,6 +25,15 @@ import com.google.common.base.Function;
 import com.google.common.base.Functions;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+import com.platzhaltr.readr.functions.ChainFunction;
+import com.platzhaltr.readr.functions.RejectingPredicateFunction;
+import com.platzhaltr.readr.functions.RemovePrefixFunction;
+import com.platzhaltr.readr.functions.ReplaceFunction;
+import com.platzhaltr.readr.predicates.ContainingPredicate;
+import com.platzhaltr.readr.predicates.EmptyPredicate;
+import com.platzhaltr.readr.predicates.EndingWithPredicate;
+import com.platzhaltr.readr.predicates.MatchingPredicate;
+import com.platzhaltr.readr.predicates.StartingWithPredicate;
 
 /**
  * The Class MogrifiedReaderMaker.
@@ -49,6 +58,18 @@ public class MogrifiedReaderMaker {
 	public MogrifiedReaderMaker() {
 		omitLinesBuilder = new OmitLinesBuilder(this);
 		transformLinesBuilder = new TransformLinesBuilder(this);
+	}
+
+	/**
+	 * Skip empty lines.
+	 *
+	 * @return the mogrified reader maker
+	 */
+	public MogrifiedReaderMaker skipEmptyLines() {
+		add(new RejectingPredicateFunction(
+				Predicates.not(new EmptyPredicate()),
+				Functions.<String> identity()));
+		return this;
 	}
 
 	/**
