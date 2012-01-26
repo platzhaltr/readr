@@ -56,7 +56,7 @@ public class FilteredReaderMakerTest {
 
 		final List<String> lines = readAsList(maker.read(getFile(PATH_SIMPLE)));
 
-		assertTrue(lines.size() == 1);
+		assertEquals(1, lines.size());
 		assertEquals("foo", lines.get(0));
 	}
 
@@ -67,14 +67,14 @@ public class FilteredReaderMakerTest {
 		final List<String> lines = readAsList(maker
 				.read(getFile(PATH_SKIP_EMPTY_LINES)));
 
-		assertTrue(lines.size() == 2);
+		assertEquals(2, lines.size());
 		assertEquals("foo", lines.get(0));
 		assertEquals("bar", lines.get(1));
 	}
 
 	@Test
-	public void testTrimLines() throws FileNotFoundException, IOException {
-		maker.trimLines();
+	public void testTrim() throws FileNotFoundException, IOException {
+		maker.trim();
 
 		final List<String> lines = readAsList(maker
 				.read(getFile(PATH_TRIM_LINES)));
