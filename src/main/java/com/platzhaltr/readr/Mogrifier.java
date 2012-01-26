@@ -36,7 +36,7 @@ public class Mogrifier {
 	 * @param type
 	 *            the type
 	 */
-	public Mogrifier(final Object object, final Type type) {
+	protected Mogrifier(final Object object, final Type type) {
 		super();
 		this.object = object;
 		this.type = type;
