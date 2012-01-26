@@ -8,6 +8,7 @@ import com.platzhaltr.readr.MogrifiedReaderMaker;
 
 public class UsageExample {
 
+	@SuppressWarnings("unused")
 	public void test(final File file) throws IOException {
 		final MogrifiedReaderMaker maker = new MogrifiedReaderMaker();
 		maker.omitLines().startingWith("#");
