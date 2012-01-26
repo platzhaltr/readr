@@ -108,7 +108,7 @@ public class MogrifiedReaderMaker {
 	 * @param function
 	 *            the function
 	 */
-	protected void add(final Function<String, String> function) {
+	private void add(final Function<String, String> function) {
 		functions.add(function);
 	}
 
