@@ -34,8 +34,11 @@ public class FilteredReaderMakerTest {
 	/** The Constant PATH_SIMPLE. */
 	private static final String PATH_SIMPLE = "/file.simple.txt";
 
-	/** The Constant PATH_SIMPLE. */
-	private static final String PATH_SKIP_EMPTY = "/skip.empty.txt";
+	/** The Constant PATH_SKIP_EMPTY_LINES. */
+	private static final String PATH_SKIP_EMPTY_LINES = "/skip.empty.txt";
+
+	/** The Constant PATH_TRIM_LINES. */
+	private static final String PATH_TRIM_LINES = "/trim.txt";
 
 	/** The maker. */
 	private MogrifiedReaderMaker maker;
@@ -62,7 +65,19 @@ public class FilteredReaderMakerTest {
 		maker.skipEmptyLines();
 
 		final List<String> lines = readAsList(maker
-				.read(getFile(PATH_SKIP_EMPTY)));
+				.read(getFile(PATH_SKIP_EMPTY_LINES)));
+
+		assertTrue(lines.size() == 2);
+		assertEquals("foo", lines.get(0));
+		assertEquals("bar", lines.get(1));
+	}
+
+	@Test
+	public void testTrimLines() throws FileNotFoundException, IOException {
+		maker.trimLines();
+
+		final List<String> lines = readAsList(maker
+				.read(getFile(PATH_TRIM_LINES)));
 
 		assertTrue(lines.size() == 2);
 		assertEquals("foo", lines.get(0));
