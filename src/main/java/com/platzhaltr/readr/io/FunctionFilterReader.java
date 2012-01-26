@@ -13,54 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
+package com.platzhaltr.readr.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import com.google.common.base.Function;
+import com.google.common.base.Functions;
 
 /**
- * This class takes a {@link Reader} and a {@link Predicate} and keeps lines to
- * which the predicate applies. Line terminators are converted to a
- * <code>\n</code>.
+ * The Class FunctionFilterReader.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class PredicateFilterReader extends BaseFilterReader {
+public class FunctionFilterReader extends BaseFilterReader {
 
-	/** The line predicate. */
-	private final Predicate<String> linePredicate;
+	/** The line transformer. */
+	private final Function<String, String> lineTransformer;
 
 	/**
-	 * Instantiates a new comment filter reader.
+	 * Instantiates a new line transformer filter reader.
 	 *
 	 * @param in
 	 *            the in
 	 */
-	protected PredicateFilterReader(final Reader in) {
-		this(in, Predicates.<String> alwaysTrue());
+	protected FunctionFilterReader(final Reader in) {
+		this(in, Functions.<String> identity());
 	}
 
 	/**
-	 * Instantiates a new comment filter reader.
+	 * Instantiates a new line transformer filter reader.
 	 *
 	 * @param in
-	 *            the reader
-	 * @param linePredicate
-	 *            the line predicate
+	 *            the in
+	 * @param lineTransformer
+	 *            the line transformer
 	 */
-	public PredicateFilterReader(final Reader in,
-			final Predicate<String> linePredicate) {
+	public FunctionFilterReader(final Reader in,
+			final Function<String, String> lineTransformer) {
 		super(in);
 		if (in instanceof BufferedReader) {
 			bufferedReader = (BufferedReader) in;
 		} else {
 			bufferedReader = new BufferedReader(in);
 		}
-		this.linePredicate = linePredicate;
+		this.lineTransformer = lineTransformer;
 	}
 
 	/**
@@ -73,7 +71,7 @@ public class PredicateFilterReader extends BaseFilterReader {
 	protected void setNextMatchingLine() throws IOException {
 		currentLine = bufferedReader.readLine();
 		while (currentLine != null) {
-			if (linePredicate.apply(currentLine)) {
+			if ((currentLine = lineTransformer.apply(currentLine)) != null) {
 				emitNewline = true;
 				currentLineIndex = 0;
 				return;

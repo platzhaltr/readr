@@ -30,6 +30,7 @@ import com.platzhaltr.readr.functions.RejectingPredicateFunction;
 import com.platzhaltr.readr.functions.RemovePrefixFunction;
 import com.platzhaltr.readr.functions.ReplaceFunction;
 import com.platzhaltr.readr.functions.TrimFunction;
+import com.platzhaltr.readr.io.FunctionFilterReader;
 import com.platzhaltr.readr.predicates.ContainingPredicate;
 import com.platzhaltr.readr.predicates.EmptyPredicate;
 import com.platzhaltr.readr.predicates.EndingWithPredicate;
