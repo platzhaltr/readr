@@ -30,8 +30,8 @@ import com.platzhaltr.readr.functions.ChainFunction;
 import com.platzhaltr.readr.functions.RemovePrefixFunction;
 import com.platzhaltr.readr.functions.ReplaceFunction;
 import com.platzhaltr.readr.functions.TrimFunction;
-import com.platzhaltr.readr.functions.TrimLeadingFunction;
-import com.platzhaltr.readr.functions.TrimTrailingFunction;
+import com.platzhaltr.readr.functions.TrimLeftFunction;
+import com.platzhaltr.readr.functions.TrimRightFunction;
 import com.platzhaltr.readr.io.FunctionFilterReader;
 import com.platzhaltr.readr.io.PredicateFilterReader;
 import com.platzhaltr.readr.predicates.ContainingPredicate;
@@ -89,8 +89,8 @@ public class MogrifiedReaderMaker {
 	 *
 	 * @return the mogrified reader maker
 	 */
-	public MogrifiedReaderMaker trimTrailing() {
-		add(new TrimTrailingFunction());
+	public MogrifiedReaderMaker trimRight() {
+		add(new TrimRightFunction());
 		return this;
 	}
 
@@ -99,8 +99,8 @@ public class MogrifiedReaderMaker {
 	 *
 	 * @return the mogrified reader maker
 	 */
-	public MogrifiedReaderMaker trimLeading() {
-		add(new TrimLeadingFunction());
+	public MogrifiedReaderMaker trimLeft() {
+		add(new TrimLeftFunction());
 		return this;
 	}
 
@@ -171,6 +171,7 @@ public class MogrifiedReaderMaker {
 	 *            the reader
 	 * @return the reader
 	 */
+	@SuppressWarnings("resource")
 	private Reader wrap(final List<Object> objects, Mogrifier.Type lastType,
 			Reader reader) {
 

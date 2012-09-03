@@ -19,13 +19,15 @@ import com.google.common.base.CharMatcher;
 import com.google.common.base.Function;
 
 /**
- * The Class TrimLeadingFunction.
+ * The Class TrimTrailingFunction.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class TrimLeadingFunction implements Function<String, String> {
+public class TrimRightFunction implements Function<String, String> {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see com.google.common.base.Function#apply(java.lang.Object)
 	 */
 	@Override
