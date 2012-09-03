@@ -13,39 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
+package com.platzhaltr.readr.predicates;
 
-import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
 /**
- * The Class AddPrefixFunction.
+ * The Class ContainingPredicate.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class AddPrefixFunction implements Function<String, String> {
+public class ContainingPredicate implements Predicate<String> {
 
-	/** The prefix. */
-	private final String prefix;
+	/** The needle. */
+	private final String needle;
 
 	/**
-	 * Instantiates a new prefix injector line transformer.
+	 * Instantiates a new contains predicate.
 	 *
-	 * @param prefix
-	 *            the prefix
+	 * @param needle
+	 *            the needle
 	 */
-	public AddPrefixFunction(final String prefix) {
+	public ContainingPredicate(final String needle) {
 		super();
-		this.prefix = prefix;
+		this.needle = needle;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.google.common.base.Function#apply(java.lang.Object)
+	 * @see com.google.common.base.Predicate#apply(java.lang.Object)
 	 */
 	@Override
-	public String apply(final String line) {
-		return prefix.concat(line);
+	public boolean apply(final String line) {
+		return line.contains(needle);
 	}
-
 }

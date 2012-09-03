@@ -13,43 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
-
-import java.util.Arrays;
-import java.util.List;
+package com.platzhaltr.readr.functions;
 
 import com.google.common.base.Function;
 
 /**
- * The Class ChainFunction.
+ * The Class ReplaceFunction.
  *
- * @param <T>
- *            the generic type
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class ChainFunction<T> implements Function<T, T> {
+public class ReplaceFunction implements Function<String, String> {
 
-	/** The functions. */
-	private final List<Function<T, T>> functions;
+	/** The old string. */
+	private final String oldString;
 
-	/**
-	 * Instantiates a new chained function.
-	 *
-	 * @param functions
-	 *            the functions
-	 */
-	public ChainFunction(final Function<T, T>... functions) {
-		this(Arrays.asList(functions));
-	}
+	/** The new string. */
+	private final String newString;
 
 	/**
-	 * Instantiates a new chain function.
+	 * Instantiates a new replacement line transformer.
 	 *
-	 * @param functions
-	 *            the functions
+	 * @param oldString
+	 *            the old string
+	 * @param newString
+	 *            the new string
 	 */
-	public ChainFunction(final List<Function<T, T>> functions) {
-		this.functions = functions;
+	public ReplaceFunction(final String oldString,
+			final String newString) {
+		this.oldString = oldString;
+		this.newString = newString;
 	}
 
 	/*
@@ -58,12 +50,8 @@ public class ChainFunction<T> implements Function<T, T> {
 	 * @see com.google.common.base.Function#apply(java.lang.Object)
 	 */
 	@Override
-	public T apply(final T input) {
-		T o = input;
-		for (final Function<T, T> function : functions) {
-			o = function.apply(o);
-		}
-		return o;
+	public String apply(final String input) {
+		return input.replace(oldString, newString);
 	}
 
 }

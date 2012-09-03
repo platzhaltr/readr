@@ -13,38 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
+package com.platzhaltr.readr.functions;
 
-import com.google.common.base.Predicate;
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Function;
 
 /**
- * The Class ContainingPredicate.
+ * The Class TrimLeadingFunction.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class ContainingPredicate implements Predicate<String> {
+public class TrimLeftFunction implements Function<String, String> {
 
-	/** The needle. */
-	private final String needle;
-
-	/**
-	 * Instantiates a new contains predicate.
-	 *
-	 * @param needle
-	 *            the needle
-	 */
-	public ContainingPredicate(final String needle) {
-		super();
-		this.needle = needle;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.google.common.base.Predicate#apply(java.lang.Object)
+	/* (non-Javadoc)
+	 * @see com.google.common.base.Function#apply(java.lang.Object)
 	 */
 	@Override
-	public boolean apply(final String line) {
-		return line.contains(needle);
+	public String apply(final String input) {
+		return CharMatcher.WHITESPACE.and(CharMatcher.isNot(' '))
+				.trimTrailingFrom(input);
 	}
 }

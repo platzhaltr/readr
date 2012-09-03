@@ -1,5 +1,5 @@
 /*
-2 * Copyright 2011 Oliver Schrenk
+ * Copyright 2011 Oliver Schrenk
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
+package com.platzhaltr.readr.functions;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 /**
- * The Class PredicateFunction.
+ * The Class RejectingPredicateFunction.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class PredicateFunction implements Function<String, String> {
+public class RejectingPredicateFunction implements Function<String, String> {
 
 	/** The predicate. */
 	private final Predicate<String> predicate;
@@ -32,14 +32,14 @@ public class PredicateFunction implements Function<String, String> {
 	private final Function<String, String> innerFunction;
 
 	/**
-	 * Instantiates a new predicate line transformer.
+	 * Instantiates a new predicate function.
 	 *
 	 * @param predicate
 	 *            the predicate
 	 * @param innerFunction
 	 *            the inner function
 	 */
-	public PredicateFunction(final Predicate<String> predicate,
+	public RejectingPredicateFunction(final Predicate<String> predicate,
 			final Function<String, String> innerFunction) {
 		super();
 		this.predicate = predicate;
@@ -53,10 +53,13 @@ public class PredicateFunction implements Function<String, String> {
 	 */
 	@Override
 	public String apply(final String line) {
+		if (line == null)
+			return null;
+
 		if (predicate.apply(line)) {
 			return innerFunction.apply(line);
 		}
 
-		return line;
+		return null;
 	}
 }

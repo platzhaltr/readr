@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.platzhaltr</groupId>
 	<artifactId>readr</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<name>Readr</name>
 	<description>Filter and transform java.io.reader</description>

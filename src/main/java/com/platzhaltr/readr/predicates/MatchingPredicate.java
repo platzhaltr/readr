@@ -13,45 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
+package com.platzhaltr.readr.predicates;
 
-import com.google.common.base.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.google.common.base.Predicate;
 
 /**
- * The Class ReplaceFunction.
+ * The Class MatchingPredicate.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class ReplaceFunction implements Function<String, String> {
+public class MatchingPredicate implements Predicate<String> {
 
-	/** The old string. */
-	private final String oldString;
-
-	/** The new string. */
-	private final String newString;
+	/** The pattern. */
+	private final Pattern pattern;
 
 	/**
-	 * Instantiates a new replacement line transformer.
+	 * Instantiates a new matching predicate.
 	 *
-	 * @param oldString
-	 *            the old string
-	 * @param newString
-	 *            the new string
+	 * @param regex
+	 *            the regex
 	 */
-	public ReplaceFunction(final String oldString,
-			final String newString) {
-		this.oldString = oldString;
-		this.newString = newString;
+	public MatchingPredicate(final String regex) {
+		pattern = Pattern.compile(regex);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.google.common.base.Function#apply(java.lang.Object)
+	 * @see com.google.common.base.Predicate#apply(java.lang.Object)
 	 */
 	@Override
-	public String apply(final String input) {
-		return input.replace(oldString, newString);
+	public boolean apply(final String line) {
+		final Matcher matcher = pattern.matcher(line);
+		return matcher.matches();
 	}
 
 }

@@ -9,9 +9,11 @@ A project that helps create [FilterReader](http://docs.oracle.com/javase/6/docs/
         public void test(final File file) throws IOException {
         	final MogrifiedReaderMaker maker = new MogrifiedReaderMaker();
         	
+        	maker.trimRight();
 			maker.omitLines().startingWith("#");
         	maker.omitLines().containing("needle");
         	maker.transformLines().byReplacing("foobar", " foobaz");
+        	
         	final Reader reader = maker.read(file);
         }
 	}

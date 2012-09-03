@@ -13,31 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.platzhaltr.readr;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+package com.platzhaltr.readr.predicates;
 
 import com.google.common.base.Predicate;
 
 /**
- * The Class MatchingPredicate.
+ * The Class StartingWithPredicate.
  *
  * @author Oliver Schrenk <oliver.schrenk@gmail.com>
  */
-public class MatchingPredicate implements Predicate<String> {
+public class StartingWithPredicate implements Predicate<String> {
 
-	/** The pattern. */
-	private final Pattern pattern;
+	/** The prefix. */
+	private final String prefix;
 
 	/**
-	 * Instantiates a new matching predicate.
+	 * Instantiates a new starting with predicate.
 	 *
-	 * @param regex
-	 *            the regex
+	 * @param prefix
+	 *            the prefix
 	 */
-	public MatchingPredicate(final String regex) {
-		pattern = Pattern.compile(regex);
+	public StartingWithPredicate(final String prefix) {
+		this.prefix = prefix;
 	}
 
 	/*
@@ -47,8 +44,7 @@ public class MatchingPredicate implements Predicate<String> {
 	 */
 	@Override
 	public boolean apply(final String line) {
-		final Matcher matcher = pattern.matcher(line);
-		return matcher.matches();
+		return line.startsWith(prefix);
 	}
 
 }
